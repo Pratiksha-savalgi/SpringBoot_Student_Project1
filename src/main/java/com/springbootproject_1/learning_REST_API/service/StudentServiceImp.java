@@ -4,6 +4,7 @@ import com.springbootproject_1.learning_REST_API.dto.StudentDto;
 import com.springbootproject_1.learning_REST_API.entity.Student;
 import com.springbootproject_1.learning_REST_API.repository.StudentRepo;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import static java.util.Arrays.stream;
 @RequiredArgsConstructor
 public class StudentServiceImp implements StudentService {
    private final StudentRepo studentrepo;
+   private final ModelMapper modelMapper;
 
     @Override
     public List<StudentDto> getAllStudents() {
@@ -24,9 +26,15 @@ public class StudentServiceImp implements StudentService {
             .toList();
 
     }
-    public StudentDto getStudentByid(Long id){
-      Student student=studentrepo.findById(id).orElseThrow(()->IllegalArgumentException("Student not found"));
+
+    @Override
+    public StudentDto getStudentByid(Long id) {
+        Student student=studentrepo.findById(id).orElseThrow(()-> new IllegalArgumentException("Student not found"));
+        return modelMapper.map(student,StudentDto.class);
     }
+
+
+
 
 
 }

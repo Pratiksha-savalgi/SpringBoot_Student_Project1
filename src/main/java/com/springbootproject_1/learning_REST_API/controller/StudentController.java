@@ -21,7 +21,7 @@ public class StudentController {
         return studentService.getAllStudents();
     }
     @GetMapping("/students/{id}")
-    public List<StudentDto> getStudentId(@PathVariable Long id){
+    public StudentDto getStudentId(@PathVariable Long id){
         return studentService.getStudentByid(id);
     }
 }

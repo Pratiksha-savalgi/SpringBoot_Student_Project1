@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface StudentService {
     List<StudentDto> getAllStudents();
-    StudentDto getStudentByid();
+    StudentDto getStudentByid(Long id);
 }
